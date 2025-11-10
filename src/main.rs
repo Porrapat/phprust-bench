@@ -15,7 +15,7 @@ fn main() {
     let start = std::time::Instant::now();
 
     let mut count = 0u64;
-    for i in 2..2_000_000 {
+    for i in 2..5_000_000 {
         if is_prime(i) {
             count += 1;
         }

@@ -10,7 +10,7 @@ function isPrime($n) {
 $start = microtime(true);
 
 $count = 0;
-for ($i = 2; $i < 2_000_000; $i++) {
+for ($i = 2; $i < 5_000_000; $i++) {
     if (isPrime($i)) {
         $count++;
     }

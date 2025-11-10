@@ -1,3 +1,5 @@
+use rayon::prelude::*;
+
 fn is_prime(n: u64) -> bool {
     if n < 2 {
         return false;
@@ -14,13 +16,11 @@ fn is_prime(n: u64) -> bool {
 fn main() {
     let start = std::time::Instant::now();
 
-    let mut count = 0u64;
-    for i in 2..5_000_000 {
-        if is_prime(i) {
-            count += 1;
-        }
-    }
+    let count = (2..5_000_000u64)
+        .into_par_iter() // ใช้ทุก CPU core พร้อมกัน
+        .filter(|&n| is_prime(n))
+        .count();
 
     let elapsed = start.elapsed().as_secs_f64();
-    println!("Rust found {} primes in {:.3} seconds.", count, elapsed);
+    println!("Rust (parallel) found {} primes in {:.3} seconds.", count, elapsed);
 }

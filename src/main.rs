@@ -1,5 +1,4 @@
 use std::env;
-use rayon::prelude::*;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -15,7 +14,7 @@ fn main() {
     let start = std::time::Instant::now();
 
     let count = (2..limit)
-        .into_par_iter()
+        .into_iter()
         .filter(|&n| is_prime(n))
         .count();
 

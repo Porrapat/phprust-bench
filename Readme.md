@@ -4,6 +4,8 @@ A simple benchmark project to compare **PHP** and **Rust** performance in comput
 
 This project demonstrates how PHP can call a compiled Rust binary via `shell_exec()` and measure total execution time, while Rust performs the heavy computation efficiently using all CPU cores via the **Rayon** library.
 
+![Benchmark Result](./images/screenshot-1.png)
+
 ---
 ## 🔗 Other languages
 [ภาษาไทย (Readme_th.md)](Readme_th.md)

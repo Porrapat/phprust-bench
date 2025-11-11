@@ -4,8 +4,17 @@ A simple benchmark project to compare **PHP** and **Rust** performance in comput
 
 This project demonstrates how PHP can call a compiled Rust binary via `shell_exec()` and measure total execution time, while Rust performs the heavy computation efficiently.
 
+With No Jit and Opcache
+
 ![Benchmark Result](./images/screenshot-1.png)
 
+With Jit and Opcache
+
+![Benchmark Result 2](./images/screenshot-3.png)
+
+How to set Opcache and JIT
+
+![Opcache](./images/screenshot-2.png)
 ---
 ## 🔗 Other languages
 [ภาษาไทย (Readme_th.md)](Readme_th.md)

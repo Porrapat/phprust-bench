@@ -2,7 +2,7 @@
 
 A simple benchmark project to compare **PHP** and **Rust** performance in computing prime numbers.
 
-This project demonstrates how PHP can call a compiled Rust binary via `shell_exec()` and measure total execution time, while Rust performs the heavy computation efficiently using all CPU cores via the **Rayon** library.
+This project demonstrates how PHP can call a compiled Rust binary via `shell_exec()` and measure total execution time, while Rust performs the heavy computation efficiently.
 
 ![Benchmark Result](./images/screenshot-1.png)
 
@@ -17,7 +17,7 @@ This project demonstrates how PHP can call a compiled Rust binary via `shell_exe
 | Language | Method | Description |
 |-----------|---------|--------------|
 | **PHP** | Pure PHP | Calculates prime numbers using a simple loop and checks for divisibility. Single-threaded. |
-| **Rust** | Binary (called via PHP) | Uses Rayon to compute in parallel across all available CPU cores. |
+| **Rust** | Binary (called via PHP) | Compute efficiently. |
 
 ---
 

@@ -19,6 +19,39 @@ This project demonstrates how PHP can call a compiled Rust binary via `shell_exe
 
 ---
 
+## 🌐 Live Demo
+
+You can view the live demo here:
+
+- **Main page:** [https://phprust-bench.porrapat.com/](https://phprust-bench.porrapat.com/)
+- **Rust call example:** [https://phprust-bench.porrapat.com/call_rust.php](https://phprust-bench.porrapat.com/call_rust.php)
+
+### 💻 Server Specs
+This project runs on the **smallest Droplet size** from **DigitalOcean (region: SGP1)**:
+
+```
+PHP-Rust-Bench
+512 MB RAM / 10 GB Disk / SGP1 - Ubuntu 25.10 x64
+```
+
+You can also test the benchmark with a custom limit by appending a `limit` parameter (default = 500,000):
+
+```bash
+https://phprust-bench.porrapat.com/?limit=100000
+https://phprust-bench.porrapat.com/?limit=400000
+https://phprust-bench.porrapat.com/?limit=800000
+https://phprust-bench.porrapat.com/call_rust.php?limit=100000
+https://phprust-bench.porrapat.com/call_rust.php?limit=400000
+https://phprust-bench.porrapat.com/call_rust.php?limit=800000
+https://phprust-bench.porrapat.com/call_rust.php?limit=2000000
+```
+
+> The limit defines the upper bound of numbers to check for primes.
+
+The PHP is capped at **2,000,000** but Rust is at **20,000,000** to prevent memory overflow or performance degradation on smaller servers.
+
+---
+
 ## 🔧 Build & Run
 
 ### 1. Build Rust binary

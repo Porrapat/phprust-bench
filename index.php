@@ -14,9 +14,9 @@ function isPrime($n)
 
 $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 500000;
 
-// Lock maximum input at 2,000,000
-if ($limit > 2000000) {
-    $limit = 2000000;
+// Lock maximum input at 50,000,000
+if ($limit > 50_000_000) {
+    $limit = 50_000_000;
 }
 
 $start = microtime(true);

@@ -6,9 +6,9 @@ fn main() {
         .and_then(|s| s.parse().ok())
         .unwrap_or(500_000); // default
 
-    // Lock maximum input at 20,000,000
-    if limit > 20_000_000 {
-        limit = 20_000_000;
+    // Lock maximum input at 50,000,000
+    if limit > 50_000_000 {
+        limit = 50_000_000;
     }
 
     let start = std::time::Instant::now();

@@ -58,6 +58,18 @@ https://phprust-bench.porrapat.com/call_rust.php?limit=800000
 https://phprust-bench.porrapat.com/call_rust.php?limit=2000000
 ```
 
+และสามารถลองใช้อัลกอรึทึมที่เร็วกว่า Sieve of Eratosthenes:
+
+```bash
+https://phprust-bench.porrapat.com/eratos.php?limit=100000
+https://phprust-bench.porrapat.com/eratos.php?limit=400000
+https://phprust-bench.porrapat.com/eratos.php?limit=800000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=100000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=400000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=800000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=2000000
+```
+
 > ค่า `limit` คือจำนวนสูงสุดที่ระบบจะใช้ในการตรวจหาจำนวนเฉพาะ (prime numbers)
 
 ฝั่ง **PHP** จำกัดสูงสุดที่ **2,000,000**
@@ -71,7 +83,8 @@ https://phprust-bench.porrapat.com/call_rust.php?limit=2000000
 ### 1. คอมไพล์ Rust
 
 ```bash
-cargo build --release
+cargo build --release --bin phprust-bench
+cargo build --release --bin phprust-bench-eratos
 ```
 
 จะได้ไฟล์ที่ `target/release/phprust-bench` (หรือ `.exe` บน Windows)

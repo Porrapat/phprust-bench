@@ -57,6 +57,19 @@ https://phprust-bench.porrapat.com/call_rust.php?limit=800000
 https://phprust-bench.porrapat.com/call_rust.php?limit=2000000
 ```
 
+Also with Sieve of Eratosthenes:
+
+```bash
+https://phprust-bench.porrapat.com/eratos.php?limit=100000
+https://phprust-bench.porrapat.com/eratos.php?limit=400000
+https://phprust-bench.porrapat.com/eratos.php?limit=800000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=100000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=400000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=800000
+https://phprust-bench.porrapat.com/call_rust_eratos.php?limit=2000000
+```
+
+
 > The limit defines the upper bound of numbers to check for primes.
 
 The PHP is capped at **2,000,000** but Rust is at **20,000,000** to prevent memory overflow or performance degradation on smaller servers.
@@ -68,7 +81,8 @@ The PHP is capped at **2,000,000** but Rust is at **20,000,000** to prevent memo
 ### 1. Build Rust binary
 
 ```bash
-cargo build --release
+cargo build --release --bin phprust-bench
+cargo build --release --bin phprust-bench-eratos
 ```
 
 This produces `target/release/phprust-bench` (or `.exe` on Windows).

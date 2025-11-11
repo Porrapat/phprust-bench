@@ -2,3 +2,7 @@
 name = "phprust-bench"
 version = "0.1.0"
 edition = "2024"
+
+[[bin]]
+name = "phprust-bench-eratos"
+path = "src/bin/eratos.rs"

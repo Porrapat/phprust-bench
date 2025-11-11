@@ -7,9 +7,9 @@ $start = microtime(true);
 $isWindows = strtoupper(substr(PHP_OS, 0, 3)) === "WIN";
 
 if ($isWindows) {
-    $cmd = '.\\target\\release\\phprust.exe ' . $limit;
+    $cmd = '.\\target\\release\\phprust-bench.exe ' . $limit;
 } else {
-    $cmd = "./target/release/phprust " . $limit;
+    $cmd = "./target/release/phprust-bench " . $limit;
 }
 
 $start = microtime(true);

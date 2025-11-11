@@ -57,7 +57,8 @@ https://phprust-bench.porrapat.com/call_rust.php?limit=800000
 https://phprust-bench.porrapat.com/call_rust.php?limit=2000000
 ```
 
-Also with Sieve of Eratosthenes:
+Also with **Sieve of Eratosthenes**:  
+Thank you from [Katopz](https://github.com/katopz)
 
 ```bash
 https://phprust-bench.porrapat.com/eratos.php?limit=100000
@@ -112,3 +113,9 @@ Total call time from PHP: 0.154 seconds.
 ## 🧱 License
 
 MIT License © 2025 Porrapat Petchdamrongskul
+
+
+## Contributors
+
+Special thanks to [Katopz](https://github.com/katopz)  
+for suggesting the Sieve of Eratosthenes algorithm.

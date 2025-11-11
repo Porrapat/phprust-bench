@@ -1,20 +1,30 @@
 <?php
-function isPrime($n) {
-    if ($n < 2) return false;
+function isPrime($n)
+{
+    if ($n < 2) {
+        return false;
+    }
     for ($i = 2; $i * $i <= $n; $i++) {
-        if ($n % $i === 0) return false;
+        if ($n % $i === 0) {
+            return false;
+        }
     }
     return true;
 }
 
-$start = microtime(true);
+$limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 500000;
 
+// Lock maximum input at 2,000,000
+if ($limit > 2000000) {
+    $limit = 2000000;
+}
+
+$start = microtime(true);
 $count = 0;
-for ($i = 2; $i < 5_000_000; $i++) {
+for ($i = 2; $i < $limit; $i++) {
     if (isPrime($i)) {
         $count++;
     }
 }
-
 $elapsed = microtime(true) - $start;
-echo "PHP found $count primes in {$elapsed} seconds.\n";
+echo "PHP found $count primes up to $limit in {$elapsed} seconds.";

@@ -1,7 +1,8 @@
 <?php
+$limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 500000;
+
 $start = microtime(true);
-$output = shell_exec('.\\target\\release\\phprust.exe');
+$output = shell_exec('.\\target\\release\\phprust.exe' . " $limit");
 $elapsed = microtime(true) - $start;
 
-echo "Rust program said:\n$output\n";
-echo "Total call time from PHP: {$elapsed} seconds\n";
+echo nl2br("$output\nTotal call time from PHP: {$elapsed} seconds\n");

@@ -19,18 +19,19 @@ impl SieveService for MySieveService {
         request: Request<SieveRequest>,
     ) -> Result<Response<SieveResponse>, Status> {
         let limit = request.get_ref().limit;
-        println!("🧮 Received request for primes up to {}", limit);
+        println!("🧮 Received request for primes up to n = {}", limit);
 
         let start = Instant::now();
         let primes = sieve_parallel(limit);
         let elapsed = start.elapsed().as_secs_f64();
+        let count = primes.len() as u64;
 
-        let reply = SieveResponse {
-            primes,
-            elapsed,
-        };
+        println!(
+            "✅ Computation done for n = {} → {} primes in {:.3} sec",
+            limit, count, elapsed
+        );
 
-        println!("✅ Computation done in {:.3} sec", elapsed);
+        let reply = SieveResponse { count, elapsed };
         Ok(Response::new(reply))
     }
 }

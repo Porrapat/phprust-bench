@@ -1,4 +1,4 @@
-use tonic::transport::{Channel, Endpoint};
+use tonic::transport::{Endpoint};
 use sieve::sieve_service_client::SieveServiceClient;
 use sieve::SieveRequest;
 use std::time::Duration;
@@ -46,7 +46,7 @@ async fn main() {
 
     println!("🧮 Received request for primes up to n = {}", limit);
 
-    let primes = match client_result {
+    match client_result {
         Ok(channel) => {
             println!("✅ Connected to server at {}", server_addr);
 
@@ -57,8 +57,11 @@ async fn main() {
             match client.compute(request).await {
                 Ok(response) => {
                     let resp = response.get_ref();
-                    println!("Server computed {} primes in {:.3} sec", resp.primes.len(), resp.elapsed);
-                    resp.primes.clone()
+                    println!(
+                        "Server computed n = {} → {} primes in {:.3} sec",
+                        limit, resp.count, resp.elapsed
+                    );
+                    vec![] // ถ้าไม่ต้องใช้ primes จริง
                 }
                 Err(err) => {
                     // println!("⚠️ Server call failed: {}", err);
@@ -83,6 +86,4 @@ async fn main() {
             local
         }
     };
-
-    println!("Total primes found: {}", primes.len());
 }

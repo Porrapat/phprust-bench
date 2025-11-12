@@ -11,6 +11,6 @@ message SieveRequest {
 }
 
 message SieveResponse {
-  repeated uint64 primes = 1;
+  uint64 count = 1;
   double elapsed = 2;
 }

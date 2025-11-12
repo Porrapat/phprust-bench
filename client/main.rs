@@ -31,7 +31,13 @@ async fn main() {
     dotenv().ok();
 
     let server_addr = env::var("SERVER_ADDR").unwrap_or_else(|_| "http://127.0.0.1:50051".to_string());
-    let limit: u64 = env::var("LIMIT").unwrap_or_else(|_| "1000000".to_string()).parse().unwrap();
+
+    let limit: u64 = std::env::args()
+        .nth(1)
+        .and_then(|x| x.parse().ok())
+        .unwrap_or(500_000);
+
+    let limit = limit.min(5_000_000_000);
 
     println!("⏳ Checking connection...");
 

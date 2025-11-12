@@ -1,6 +1,7 @@
-use tonic::transport::Channel;
+use tonic::transport::{Channel, Endpoint};
 use sieve::sieve_service_client::SieveServiceClient;
 use sieve::SieveRequest;
+use std::time::Duration;
 
 pub mod sieve {
     tonic::include_proto!("sieve");
@@ -25,30 +26,45 @@ fn sieve_local(limit: u64) -> Vec<u64> {
 #[tokio::main]
 async fn main() {
     let limit = 1_000_000;
-    let server_addr = "http://192.168.1.10:50051"; // Fix IP ของ Rayon Server
+    // let server_addr = "http://192.168.1.10:50051"; // Fix IP ของ Rayon Server
 
-    println!("Start working here!");
-    let client_result = SieveServiceClient::connect(server_addr.to_string()).await;
+    // println!("Start working here!");
+    // let client_result = SieveServiceClient::connect(server_addr.to_string()).await;
+
+    // let server_addr = "http://192.168.1.10:50051";
+    let server_addr = "http://127.0.0.1:50051";
+
+    println!("⏳ Checking connection...");
+
+    let endpoint = Endpoint::from_shared(server_addr.to_string())
+        .unwrap()
+        .timeout(Duration::from_millis(100))
+        .connect_timeout(Duration::from_millis(100));
+
+    let client_result = endpoint.connect().await;
 
     let primes = match client_result {
-        Ok(mut client) => {
+        Ok(channel) => {
             println!("✅ Connected to server at {}", server_addr);
+
+            // ✅ ต้อง wrap channel ก่อนใช้
+            let mut client = SieveServiceClient::new(channel);
+
             let request = tonic::Request::new(SieveRequest { limit });
             match client.compute(request).await {
                 Ok(response) => {
-                    println!("Server computed {} primes in {:.3} sec",
-                        response.get_ref().primes.len(),
-                        response.get_ref().elapsed);
-                    response.get_ref().primes.clone()
+                    let resp = response.get_ref();
+                    println!("Server computed {} primes in {:.3} sec", resp.primes.len(), resp.elapsed);
+                    resp.primes.clone()
                 }
-                Err(_) => {
-                    println!("⚠️ Server call failed — using local sieve");
+                Err(err) => {
+                    println!("⚠️ Server call failed: {}", err);
                     sieve_local(limit)
                 }
             }
         }
-        Err(_) => {
-            println!("⚠️ Server unavailable — using local sieve");
+        Err(err) => {
+            println!("⚠️ Server unavailable ({}), using local sieve", err);
             sieve_local(limit)
         }
     };

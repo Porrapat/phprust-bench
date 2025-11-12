@@ -3,6 +3,8 @@ use sieve::sieve_service_client::SieveServiceClient;
 use sieve::SieveRequest;
 use std::time::Duration;
 use std::time::Instant;
+use dotenvy::dotenv;
+use std::env;
 
 pub mod sieve {
     tonic::include_proto!("sieve");
@@ -26,14 +28,10 @@ fn sieve_local(limit: u64) -> Vec<u64> {
 
 #[tokio::main]
 async fn main() {
-    let limit = 1_000_000;
-    // let server_addr = "http://192.168.1.10:50051"; // Fix IP ของ Rayon Server
+    dotenv().ok();
 
-    // println!("Start working here!");
-    // let client_result = SieveServiceClient::connect(server_addr.to_string()).await;
-
-    // let server_addr = "http://192.168.1.10:50051";
-    let server_addr = "http://127.0.0.1:50051";
+    let server_addr = env::var("SERVER_ADDR").unwrap_or_else(|_| "http://127.0.0.1:50051".to_string());
+    let limit: u64 = env::var("LIMIT").unwrap_or_else(|_| "1000000".to_string()).parse().unwrap();
 
     println!("⏳ Checking connection...");
 

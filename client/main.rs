@@ -39,7 +39,7 @@ async fn main() {
 
     let endpoint = Endpoint::from_shared(server_addr.to_string())
         .unwrap()
-        .timeout(Duration::from_millis(300))
+        .timeout(Duration::from_secs(10))
         .connect_timeout(Duration::from_millis(100));
 
     let client_result = endpoint.connect().await;

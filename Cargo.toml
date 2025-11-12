@@ -11,6 +11,7 @@ path = "src/bin/eratos.rs"
 tonic = "0.12"
 prost = "0.13"
 tokio = { version = "1", features = ["full"] }
+rayon = "1.10"
 
 [build-dependencies]
 tonic-build = "0.12"
@@ -19,3 +20,7 @@ tonic-build = "0.12"
 [[bin]]
 name = "phprust-bench-client"
 path = "client/main.rs"
+
+[[bin]]
+name = "phprust-bench-server"
+path = "server/main.rs"

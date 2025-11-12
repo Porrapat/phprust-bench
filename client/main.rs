@@ -2,6 +2,7 @@ use tonic::transport::{Channel, Endpoint};
 use sieve::sieve_service_client::SieveServiceClient;
 use sieve::SieveRequest;
 use std::time::Duration;
+use std::time::Instant;
 
 pub mod sieve {
     tonic::include_proto!("sieve");
@@ -43,6 +44,8 @@ async fn main() {
 
     let client_result = endpoint.connect().await;
 
+    println!("🧮 Received request for primes up to n = {}", limit);
+
     let primes = match client_result {
         Ok(channel) => {
             println!("✅ Connected to server at {}", server_addr);
@@ -58,14 +61,26 @@ async fn main() {
                     resp.primes.clone()
                 }
                 Err(err) => {
-                    println!("⚠️ Server call failed: {}", err);
-                    sieve_local(limit)
+                    // println!("⚠️ Server call failed: {}", err);
+                    // sieve_local(limit)
+                    println!("⚠️ Server call failed: {}, using local sieve", err);
+                    let start = Instant::now();
+                    let local = sieve_local(limit);
+                    let elapsed = start.elapsed().as_secs_f64();
+                    println!("🧮 Local computed {} primes in {:.3} sec", local.len(), elapsed);
+                    local
                 }
             }
         }
         Err(err) => {
-            println!("⚠️ Server unavailable ({}), using local sieve", err);
-            sieve_local(limit)
+            // println!("⚠️ Server unavailable ({}), using local sieve", err);
+            // sieve_local(limit)
+            println!("⚠️ Server call failed: {}, using local sieve", err);
+            let start = Instant::now();
+            let local = sieve_local(limit);
+            let elapsed = start.elapsed().as_secs_f64();
+            println!("🧮 Local computed {} primes in {:.3} sec", local.len(), elapsed);
+            local
         }
     };
 

@@ -116,3 +116,13 @@ MIT License © 2025 Porrapat Petchdamrongskul
 
 Special thanks to [Katopz](https://github.com/katopz)  
 สำหรับการแนะนำ Sieve of Eratosthenes algorithm.
+
+## ทดสอบโดยใช้ gRPC ติดต่อไปยัง Server อีกตัว
+
+ผมใช้ Server อีกตัวและเชื่อมต่อไปโดยใช้ gRPC (4 vCPU)
+
+![gRPC](./images/screenshot-11.png)
+
+และนี่คือเต็มที่ 48 vCPU กับ ผลลัพธ์ล่าสุด
+
+![gRPC](./images/screenshot-12.png)

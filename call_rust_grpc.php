@@ -1,6 +1,11 @@
 <?php
 $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 500000;
 
+// limit not exceed 10,000,000
+if ($limit > 10_000_000) {
+    $limit = 10_000_000;
+}
+
 $start = microtime(true);
 
 // Check OS

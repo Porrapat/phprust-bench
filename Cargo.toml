@@ -6,3 +6,16 @@ edition = "2024"
 [[bin]]
 name = "phprust-bench-eratos"
 path = "src/bin/eratos.rs"
+
+[dependencies]
+tonic = "0.12"
+prost = "0.13"
+tokio = { version = "1", features = ["full"] }
+
+[build-dependencies]
+tonic-build = "0.12"
+
+
+[[bin]]
+name = "phprust-bench-client"
+path = "client/main.rs"

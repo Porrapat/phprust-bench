@@ -1,2 +1,4 @@
 /target
 .env
+/zig/.zig-cache
+/zig/zig-out

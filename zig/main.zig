@@ -1,5 +1,6 @@
 // zig build-exe main.zig -O ReleaseFast -fstrip -fsingle-threaded -femit-bin=phprust-bench.exe
-
+// zig build-exe main.zig -O ReleaseFast -fstrip -fsingle-threaded -target x86_64-linux-gnu -femit-bin=phprust-bench
+// Don't forget to chmod -R 755 phprust-bench too
 const std = @import("std");
 const math = std.math;
 
